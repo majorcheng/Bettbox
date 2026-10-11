@@ -15,7 +15,7 @@ func TestHandleConvertV2Ray(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	for _, want := range []string{"name: vless", "network: xhttp", "reality-opts:", "xhttp-opts:"} {
+	for _, want := range []string{"name: vless", "network: xhttp", "reality-opts:", "support-x25519mlkem768: true", "xhttp-opts:"} {
 		if !strings.Contains(content, want) {
 			t.Fatalf("converted config does not contain %q:\n%s", want, content)
 		}

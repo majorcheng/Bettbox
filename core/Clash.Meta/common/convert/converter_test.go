@@ -211,8 +211,9 @@ func TestConvertsV2RayVlessXHTTPReality(t *testing.T) {
 	assert.Equal(t, true, proxies[0]["tls"])
 	assert.Equal(t, "cover.example.com", proxies[0]["servername"])
 	assert.Equal(t, map[string]any{
-		"public-key": publicKey,
-		"short-id":   "00112233",
+		"public-key":             publicKey,
+		"short-id":               "00112233",
+		"support-x25519mlkem768": true,
 	}, proxies[0]["reality-opts"])
 	assert.Equal(t, map[string]any{
 		"path": "/vless-xhttp",
@@ -230,7 +231,7 @@ func TestConvertsV2RayRealityMLKEM768(t *testing.T) {
 		name, query, publicKey string
 		want                   any
 	}{
-		{"absent", "", publicKey, nil},
+		{"absent", "", publicKey, true},
 		{"empty", "&support-x25519mlkem768=", publicKey, nil},
 		{"true", "&support-x25519mlkem768=true", publicKey, true},
 		{"one", "&support-x25519mlkem768=1", publicKey, true},

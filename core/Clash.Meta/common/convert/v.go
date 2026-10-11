@@ -56,6 +56,9 @@ func handleVShareLink(names map[string]int, url *url.URL, scheme string, proxy m
 			if enabled, err := strconv.ParseBool(value); err == nil {
 				realityOpts["support-x25519mlkem768"] = enabled
 			}
+		} else if !query.Has("support-x25519mlkem768") {
+			// Xray share links omit this knob; match the modern Xray client default.
+			realityOpts["support-x25519mlkem768"] = true
 		}
 		proxy["reality-opts"] = realityOpts
 	}
