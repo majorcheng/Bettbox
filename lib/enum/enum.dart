@@ -228,6 +228,7 @@ enum ActionMethod {
   forceGc,
   shutdown,
   validateConfig,
+  convertV2Ray,
   updateConfig,
   getConfig,
   getProxies,

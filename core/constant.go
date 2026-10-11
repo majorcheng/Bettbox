@@ -96,6 +96,7 @@ const (
 	forceGcMethod                  Method = "forceGc"
 	shutdownMethod                 Method = "shutdown"
 	validateConfigMethod           Method = "validateConfig"
+	convertV2RayMethod             Method = "convertV2Ray"
 	decryptAgeConfigMethod         Method = "decryptAgeConfig"
 	updateConfigMethod             Method = "updateConfig"
 	getProxiesMethod               Method = "getProxies"

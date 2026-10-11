@@ -322,7 +322,7 @@ class EditProfileViewState extends State<EditProfileView> {
               if (value == null || value.isEmpty) {
                 return appLocalizations.profileUrlNullValidationDesc;
               }
-              if (!value.isUrl) {
+              if (!value.isProfileUrl) {
                 return appLocalizations.profileUrlInvalidValidationDesc;
               }
               return null;

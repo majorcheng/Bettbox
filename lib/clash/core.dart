@@ -74,6 +74,18 @@ class ClashCore {
     return clashInterface.validateConfig(data, ageSecretKey: ageSecretKey);
   }
 
+  Future<String> convertV2Ray(String data) async {
+    final result = await clashInterface.convertV2Ray(data);
+    if (result.isError) {
+      throw result.message;
+    }
+    final content = result.data;
+    if (content == null || content.isEmpty) {
+      throw 'V2Ray link conversion returned empty content';
+    }
+    return content;
+  }
+
   FutureOr<String> decryptAgeConfig(String data, String ageSecretKey) {
     return clashInterface.decryptAgeConfig(data, ageSecretKey);
   }

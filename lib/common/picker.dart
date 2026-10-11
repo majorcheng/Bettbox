@@ -88,7 +88,7 @@ class Picker {
 
   Future<String?> decodeProfileUrlFromQrImage(String path) async {
     final result = await _decodeQrCodeImage(path);
-    if (result == null || !result.isUrl) {
+    if (result == null || !result.isProfileUrl) {
       throw appLocalizations.pleaseUploadValidQrcode;
     }
     return result;

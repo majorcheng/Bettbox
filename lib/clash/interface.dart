@@ -20,6 +20,8 @@ mixin ClashInterface {
 
   FutureOr<String> validateConfig(String data, {String? ageSecretKey});
 
+  Future<Result<String>> convertV2Ray(String data);
+
   FutureOr<String> decryptAgeConfig(String data, String ageSecretKey);
 
   FutureOr<Result> getConfig(String path, {String? ageSecretKey});
@@ -127,6 +129,7 @@ abstract class ClashHandlerInterface with ClashInterface {
           return;
         case ActionMethod.getConfig:
         case ActionMethod.convertAgeSecretKeyToPublicKey:
+        case ActionMethod.convertV2Ray:
           completer?.complete(result.toResult);
           return;
         case ActionMethod.generateAgeKeyPair:
@@ -243,6 +246,20 @@ abstract class ClashHandlerInterface with ClashInterface {
     return invoke<String>(
       method: ActionMethod.validateConfig,
       data: json.encode(params),
+    );
+  }
+
+  @override
+  Future<Result<String>> convertV2Ray(String data) async {
+    final res = await invoke<Result>(
+      method: ActionMethod.convertV2Ray,
+      data: data,
+      defaultValue: Result.error('V2Ray link conversion failed'),
+    );
+    return Result<String>(
+      data: res.data?.toString(),
+      type: res.type,
+      message: res.message,
     );
   }
 

@@ -190,6 +190,17 @@ extension ProfileExtension on Profile {
   }
 
   Future<Profile> update({bool validate = true}) async {
+    if (url.isVlessUrl) {
+      final content = await clashCore.convertV2Ray(url);
+      final fragment = Uri.tryParse(url)?.fragment;
+      return await copyWith(
+        label: label ?? (fragment == null || fragment.isEmpty ? id : fragment),
+      ).saveFile(
+        Uint8List.fromList(utf8.encode(content)),
+        validate: validate,
+      );
+    }
+
     final response = await request.getFileResponseForUrl(url);
     final disposition = response.headers['content-disposition']?.firstOrNull;
     final userinfo = response.headers['subscription-userinfo']?.firstOrNull;

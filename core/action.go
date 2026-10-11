@@ -76,6 +76,14 @@ func handleAction(action *Action, result ActionResult) {
 		}
 		result.success(handleValidateConfig(&params))
 		return
+	case convertV2RayMethod:
+		data, err := handleConvertV2Ray(action.Data.(string))
+		if err != nil {
+			result.error(err.Error())
+		} else {
+			result.success(data)
+		}
+		return
 	case decryptAgeConfigMethod:
 		paramsString := action.Data.(string)
 		var params DecryptAgeConfigParams

@@ -18,6 +18,7 @@ import (
 
 	"github.com/metacubex/mihomo/adapter"
 	"github.com/metacubex/mihomo/adapter/outboundgroup"
+	"github.com/metacubex/mihomo/common/convert"
 	"github.com/metacubex/mihomo/common/observable"
 	"github.com/metacubex/mihomo/common/utils"
 	"github.com/metacubex/mihomo/common/yaml"
@@ -139,6 +140,19 @@ func handleValidateConfig(params *ValidateConfigParams) string {
 		return err.Error()
 	}
 	return ""
+}
+
+func handleConvertV2Ray(data string) (string, error) {
+	proxies, err := convert.ConvertsV2Ray([]byte(data))
+	if err != nil {
+		return "", err
+	}
+
+	result, err := yaml.Marshal(map[string]any{"proxies": proxies})
+	if err != nil {
+		return "", err
+	}
+	return string(result), nil
 }
 
 func handleDecryptAgeConfig(params *DecryptAgeConfigParams) string {

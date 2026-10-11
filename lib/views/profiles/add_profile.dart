@@ -64,7 +64,7 @@ class AddProfileView extends StatelessWidget {
         return;
       }
 
-      if (!text.isUrl) {
+      if (!text.isProfileUrl) {
         if (context.mounted) {
           context.showSnackBar(
             appLocalizations.urlTip(appLocalizations.clipboard),

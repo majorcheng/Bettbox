@@ -297,6 +297,7 @@ const _$ActionMethodEnumMap = {
   ActionMethod.forceGc: 'forceGc',
   ActionMethod.shutdown: 'shutdown',
   ActionMethod.validateConfig: 'validateConfig',
+  ActionMethod.convertV2Ray: 'convertV2Ray',
   ActionMethod.updateConfig: 'updateConfig',
   ActionMethod.getConfig: 'getConfig',
   ActionMethod.getProxies: 'getProxies',

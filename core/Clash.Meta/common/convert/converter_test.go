@@ -195,6 +195,35 @@ func TestConvertsV2RayVlessRealityVisionTCPWithoutHeaderType(t *testing.T) {
 	assert.NoError(t, err)
 }
 
+func TestConvertsV2RayVlessXHTTPReality(t *testing.T) {
+	const publicKey = "ppQ9FwLrLIa0AOrp1WvcyiaQ37vg2WSy_CD4bIdiTUw"
+	uri := "vless://b831381d-6324-4d53-ad4f-8cda48b30811@example.com:443" +
+		"?encryption=none&security=reality&type=xhttp&sni=cover.example.com" +
+		"&fp=chrome&pbk=" + publicKey + "&sid=00112233" +
+		"&path=%2Fvless-xhttp&host=cover.example.com&mode=stream-one"
+
+	proxies, err := ConvertsV2Ray([]byte(uri))
+	assert.NoError(t, err)
+	assert.Len(t, proxies, 1)
+	assert.Equal(t, "vless", proxies[0]["name"])
+	assert.Equal(t, "vless", proxies[0]["type"])
+	assert.Equal(t, "xhttp", proxies[0]["network"])
+	assert.Equal(t, true, proxies[0]["tls"])
+	assert.Equal(t, "cover.example.com", proxies[0]["servername"])
+	assert.Equal(t, map[string]any{
+		"public-key": publicKey,
+		"short-id":   "00112233",
+	}, proxies[0]["reality-opts"])
+	assert.Equal(t, map[string]any{
+		"path": "/vless-xhttp",
+		"host": "cover.example.com",
+		"mode": "stream-one",
+	}, proxies[0]["xhttp-opts"])
+
+	_, err = adapter.ParseProxy(proxies[0])
+	assert.NoError(t, err)
+}
+
 func TestConvertsV2RayRealityMLKEM768(t *testing.T) {
 	const publicKey = "ppQ9FwLrLIa0AOrp1WvcyiaQ37vg2WSy_CD4bIdiTUw"
 	tests := []struct {

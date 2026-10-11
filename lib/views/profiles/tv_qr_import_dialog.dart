@@ -141,7 +141,7 @@ class _TvQrImportDialogState extends State<TvQrImportDialog> {
         }
 
         final url = (data['url'] as String? ?? '').trim();
-        if (url.isEmpty || !url.isUrl) {
+        if (url.isEmpty || !url.isProfileUrl) {
           _respondJson(
             request,
             statusCode: 400,

@@ -27,6 +27,14 @@ extension StringExtension on String {
     return isRemoteUrl || isLocalUrl;
   }
 
+  bool get isVlessUrl {
+    return RegExp(r'^vless://', caseSensitive: false).hasMatch(trim());
+  }
+
+  bool get isProfileUrl {
+    return isUrl || isVlessUrl;
+  }
+
   dynamic get splitByMultipleSeparators {
     final parts = split(
       RegExp(r'[, ;]+'),

@@ -43,7 +43,7 @@ class _ScanPageState extends State<ScanPage> with WidgetsBindingObserver {
     final rawValue = barcodeCapture.barcodes.first.rawValue?.trim();
     if (rawValue == null || rawValue.isEmpty) return;
     _handled = true;
-    if (!rawValue.toLowerCase().isUrl) {
+    if (!rawValue.isProfileUrl) {
       Navigator.pop(context);
       return;
     }
